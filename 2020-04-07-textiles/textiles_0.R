@@ -62,15 +62,15 @@ tg2 <- tg %>%
   mutate(components = group_components()) %>%
   activate(nodes)
 
+nd <- as_tibble(tg2)
 n_componencts <- max(nd$components)
 n_componencts
 
-nd <- as_tibble(tg2)
-
 library(grid)
 
-gg <- ggplot(nd, aes(-x,-y, fill = as.factor(components))) +
+gg <- ggplot(nd, aes(-x,-y, fill = components)) +
   geom_raster() +
+  scale_fill_viridis() +
   coord_equal() + guides(fill = FALSE) +
   theme_void()
 print(gg, vp=viewport(angle=90))
